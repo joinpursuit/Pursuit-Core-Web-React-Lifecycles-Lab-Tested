@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 
 import { Todo } from "./Todo";
 
@@ -15,22 +15,21 @@ class App extends React.Component {
   onSubmit = (event) => {
     event.preventDefault();
     this.setState({
-      todos: [
-        ...this.state.todos,
-        {
-          id: this.state.todos.length,
-          text: this.state.input,
-        },
-      ],
+      todos: [...this.state.todos, this.state.input],
     });
   };
 
-  removeTodo = (id) => {
-    const index = this.state.todos.findIndex((todo) => todo.id === id);
+  removeTodo = (index) => {
     this.setState({
       todos: [...this.state.todos.slice(0, index), ...this.state.todos.slice(index + 1)],
     });
   };
+
+  componentDidUpdate(_, previousState) {
+    if (previousState.todos.length !== this.state.todos.length) {
+      toast(`Remaining todos: ${this.state.todos.length}`);
+    }
+  }
 
   render() {
     return (
@@ -43,9 +42,9 @@ class App extends React.Component {
           />
         </form>
         <div id="todos">
-          {this.state.todos.map((todo) => (
-            <Todo key={`${todo.id}`} onClose={() => this.removeTodo(todo.id)}>
-              {todo.text}
+          {this.state.todos.map((todo, index) => (
+            <Todo key={`${todo}-${index}`} onClose={() => this.removeTodo(index)}>
+              {todo}
             </Todo>
           ))}
         </div>
