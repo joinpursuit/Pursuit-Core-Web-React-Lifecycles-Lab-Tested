@@ -1,4 +1,4 @@
-describe("feature two", () => {
+describe("Bonus", () => {
   it("adds a todo and toast when submitted", () => {
     cy.visit("http://localhost:3000");
     cy.get("input").type("say hello");
