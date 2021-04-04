@@ -7,7 +7,7 @@ workflows:
       - cypress/run:
           start: npm start
           spec:
-            - "cypress/integration/index.test.js"
+            - cypress/integration/index.test.js
           post-steps:
             - store_test_results:
                 path: ./reports/junit
