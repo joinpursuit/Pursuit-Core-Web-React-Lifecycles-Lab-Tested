@@ -1,30 +1,27 @@
-import React from "react"
-import uuid from "react-uuid"
+import React from "react";
 
-class TodoForm extends React.Component{
-    state = {input: ""}
+class TodoForm extends React.Component {
+  state = { input: "" };
 
-    handleInput = (e) => {
-        this.setState({input: e.target.value})
-    } 
+  handleChange = (e) => {
+    this.setState({ input: e.target.value });
+  };
 
-    handleSubmit = (e) => {
-        e.preventDefault()
-        const {addToDo} = this.props
-        const newToDo = {id: uuid(), text: this.state.input, completed: false}
-        addToDo(newToDo)
-        this.setState({input: ""})
-    }
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { addTodo } = this.props;
+    addTodo(this.state.input);
+    this.setState({ input: "" });
+  };
 
-    render(){
-        const { input } = this.state
-        return(
-            <form onSubmit={this.handleSubmit}>
-                <label htmlFor="text-input">Add To Do: </label>
-                <input onChange={this.handleInput} id="text-input" type="text" value={input}/>
-            </form>
-        )
-    }
+  render() {
+    const { input } = this.state;
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <input type="text" onChange={this.handleChange} value={input} />
+      </form>
+    );
+  }
 }
 
 export default TodoForm;
