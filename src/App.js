@@ -11,7 +11,7 @@ state = { todos: [] };
 
   addTodo = (todo) => {
     this.setState((prevState) => {
-      return { todos: [todo, ...prevState.todos] };
+      return { todos: [...prevState.todos, todo] };
     });
   };
   
@@ -20,6 +20,7 @@ state = { todos: [] };
     const filterArr = this.state.todos.filter((input) => input.id !== id)
     this.setState({todos: filterArr})
   }
+
 
 
   render() {

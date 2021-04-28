@@ -5,16 +5,16 @@ import uuid from "react-uuid"
 // toast.configure()
 
 class TodoForm extends React.Component {
-    state= {userInput:""}
+    state= {input:""}
 
     handleChange = (e) => {
-        this.setState({userInput: e.target.value})
+        this.setState({input: e.target.value})
     }
     
     handleSubmit = (e) => {
         e.preventDefault();
-        const {userInput} = this.state
-        const newtodo = {id: uuid(), text: userInput}
+        const {input} = this.state
+        const newtodo = {id: uuid(), text: input}
         this.props.addTodo(newtodo)
         this.setState({input: ""})
     }

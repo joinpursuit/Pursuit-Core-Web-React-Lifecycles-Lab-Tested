@@ -2,7 +2,8 @@ import React from "react";
 import { toast } from "react-toastify";
 toast.configure();
 
-class TodoListItem extends React.Component {
+class TodoItem extends React.Component {
+  
   componentDidMount() {
     const {todo} = this.props
     toast.success(`New todo added: ${todo.text} `);
@@ -24,4 +25,4 @@ class TodoListItem extends React.Component {
     );
   }
 }
-export default TodoListItem;
+export default TodoItem;
