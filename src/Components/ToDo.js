@@ -6,9 +6,14 @@ class ToDo extends React.Component{
         console.log(this.props)
         return (
             <div>
-                <ul>
-                    {}
-                </ul>
+                {/* <ul>
+                {this.props.list((todo)=>{
+                    return <li key={todo.id} >
+                        {todo.type}
+
+                    </li>
+                })}
+                </ul> */}
             </div>
 
         )
