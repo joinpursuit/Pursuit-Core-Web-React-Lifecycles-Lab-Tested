@@ -3,3 +3,17 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+input {
+  margin-top: 50px;
+}
+
+li {
+  list-style: none;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

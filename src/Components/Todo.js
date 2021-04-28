@@ -15,7 +15,7 @@ class Todo extends React.Component {
 	render() {
 		const { todo, removeTodo } = this.props;
 		return (
-			<div>
+			<div className="todo-item">
 				<li key={todo.id}>{todo.name}</li>
 				<button
 					onClick={() => {
