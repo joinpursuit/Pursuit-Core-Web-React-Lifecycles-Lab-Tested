@@ -1,11 +1,14 @@
 import React from "react";
 
-const TodoListItem = ({}) => {
-    return(
-        <li>
+const TodoListItem = ({ todo, deleteTodo }) => {
+  const { text } = todo;
 
-        </li>
-    )
-}
+  return (
+    <li>
+      {text}
+      <button onClick={this.handleClick}></button>
+    </li>
+  );
+};
 
 export default TodoListItem;
