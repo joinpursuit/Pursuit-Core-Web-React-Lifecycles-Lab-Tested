@@ -1,5 +1,6 @@
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
+import "../index.css"
 class Todo extends React.Component {
 
 	componentDidMount() {
@@ -12,7 +13,7 @@ class Todo extends React.Component {
 	render() {
 		const { todo, removeTodo } = this.props;
 		return (
-			<div>
+			<div className="todo-item">
 				<li key={todo.id}>{todo.name}</li>
 				<button onClick={() => {
 						removeTodo(todo.id);
