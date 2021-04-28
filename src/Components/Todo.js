@@ -1,32 +1,25 @@
 import React from "react";
 import { ToastContainer, toast } from "react-toastify";
 class Todo extends React.Component {
-    state={todo: this.props.todo}
+
 	componentDidMount() {
-		toast.success(`New todo added: ${this.state.todo.name}`);
+		toast.success(`New todo added: ${this.props.todo.name}`);
 	}
 
-    componentWillUnmount() {
-        toast.error(`todo deleted: ${this.state.todo.name}`);
-    }
-    
-    componentDidUpdate(prevProps) {
-        console.log(prevProps)
-    }
-
+	componentWillUnmount() {
+		toast.error(`Todo deleted: ${this.props.todo.name}`);
+	}
 	render() {
 		const { todo, removeTodo } = this.props;
 		return (
 			<div>
-				<li>{todo.name}</li>
-				<button
-					onClick={() => {
+				<li key={todo.id}>{todo.name}</li>
+				<button onClick={() => {
 						removeTodo(todo.id);
 					}}
 				>
 					x
 				</button>
-				<ToastContainer />
 			</div>
 		);
 	}
