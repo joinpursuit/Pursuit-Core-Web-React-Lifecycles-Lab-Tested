@@ -6,7 +6,8 @@ const TodoListItem = ({ todo, deleteTodo }) => {
   return (
     <li>
       {text}
-      <button onClick={this.handleClick}></button>
+      {console.log(text)}
+      <button>x</button>
     </li>
   );
 };

@@ -4,28 +4,34 @@ import { ToastContainer } from "react-toastify";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import TodoForm from "./component/TodoForm";
-import TodoListItem from "./component/TodoListItem";
+import TodoList from "./component/TodoList";
 
 class App extends React.Component {
-  state = { todos: [{id: 1, text: "", completed: true}], userInput: ""}
+  state = { todos: [{ id: "", text: "", completed: true }], userInput: "" };
+
+  addTodo = (todo) => {
+    const newTodo = { id: uuid(), text: todo };
+    // debugger
+    // console.log(newTodo);
+
+    this.setState((prevState) => {
+      return {todos: [...prevState.todos, newTodo]};
+    });
+  };
+
+  handleChange = (e) => {
+    const { value } = e.target;
+    this.setState = { userInput: value };
+    // console.log(userInput);
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const { userInput } = this.state;
-    const newTodo = { id: uuid(), text: userInput, completed: false };
-    this.addTodo(newTodo);
-    this.setState({userInput: ""});
-  }
-  
-  handleChange = (e) => {
-    const {value} = e.target
-    this.setState = ({userInput: value})
-  }
-
-  addTodo = (todo) => {
-    this.setState((prevState) => {
-      return { todos: [todo, ...prevState.todos] };
-    });
+    // const newTodo = { id: uuid(), text: userInput, completed: false };
+    // this.addTodo(newTodo);
+    this.addTodo(userInput);
+    // this.setState({ userInput: "" });
   };
 
   render() {
@@ -34,8 +40,11 @@ class App extends React.Component {
     return (
       <div className="app">
         <ToastContainer />
-        <TodoForm handleSubmit={this.handleSubmit} handleChange={this.handleChange}/>
-        {/* <TodoListItem todos={todos}/> */}
+        <TodoForm
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+        />
+        <TodoList addTodo={this.addTodo} todos={todos} key={todos.id}/>
       </div>
     );
   }
