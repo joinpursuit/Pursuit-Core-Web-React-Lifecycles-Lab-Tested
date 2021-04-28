@@ -1,15 +1,17 @@
 import React from "react";
-import { ToastContainer } from "react-toastify";
 
-import "../node_modules/react-toastify/dist/ReactToastify.css";
+import Todos from "./Components/Todos";
+
+
 import "./App.css";
 
 class App extends React.Component {
+  
   render() {
     return (
       <div className="app">
-        <ToastContainer />
-        Give me something to do?!
+       
+        <Todos />
       </div>
     );
   }
