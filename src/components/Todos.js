@@ -1,9 +1,10 @@
 import React from "react";
-
-import TodoForm from "./TodoForm";
+import { toast, ToastContainer } from "react-toastify";
+import "../../node_modules/react-toastify/dist/ReactToastify.css";
+import TodoForm from "./TodoForm"
 import Todo from "./Todo";
 
-let idItem = 1;
+// let idItem = 1;
 
 
 class Todos extends React.Component {
@@ -15,11 +16,17 @@ class Todos extends React.Component {
 }
 
   addTodo = (todo) => {
-    const newTodoItem = { id: idItem++, type: todo };
+    // const newTodoItem = { id: idItem++, type: todo };
     this.setState((prevState) => ({
-      todoList: [newTodoItem, ...prevState.todoList],
+      todoList: [ ...prevState.todoList, todo],
     }));
   };
+
+     componentDidUpdate() {
+       let count=this.state.todoList.length
+       toast(`Remaining todos: ${count}`)
+    }
+
   
 
 
@@ -27,9 +34,9 @@ class Todos extends React.Component {
       const {todoList} = this.state
     return (
       <div>
-        
+          <ToastContainer />
         <TodoForm addTodo={this.addTodo} />
-        <Todo removeTodo={this.removeTodo} todoList={todoList} />
+        <Todo toast={toast} removeTodo={this.removeTodo} todoList={todoList} />
       </div>
     );
   }

@@ -1,34 +1,25 @@
 import { Component } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "../../node_modules/react-toastify/dist/ReactToastify.css";
 
-toast.configure();
+import TodoItem from "./TodoItem";
+
 class Todo extends Component {
-  notify = () => {
-    const { todoList, removeTodo } = this.props;
-    todoList.forEach(todoItem => {
-
-        toast.success(`New todo added: ${todoItem}`);
-    })
-  };
-
-  componentDidMount() {
-    this.notify();
-  }
   render() {
-    const { todoList, removeTodo } = this.props;
+    const { todoList, removeTodo, toast } = this.props;
     return (
+        <div>
       <ul id="todos">
-        <ToastContainer />
         {todoList.map((todoItem) => {
           return (
-            <li key={todoItem.id}>
-              {todoItem.type}
-              <button onClick={() => removeTodo(todoItem.id)}>x</button>
-            </li>
+            <TodoItem
+              key={todoItem.id}
+              toast={toast}
+              todoItem={todoItem}
+              removeTodo={removeTodo}
+            />
           );
         })}
       </ul>
+      </div>
     );
   }
 }

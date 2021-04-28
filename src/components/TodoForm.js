@@ -1,5 +1,7 @@
 import React from "react";
 
+let idItem = 1;
+
 class TodoForm extends React.Component {
   state = { input: "" };
 
@@ -9,8 +11,9 @@ class TodoForm extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const newTodoItem = { id: idItem++, type: this.state.input };
     const { addTodo } = this.props;
-    addTodo(this.state.input);
+    addTodo(newTodoItem);
     this.setState({ input: "" });
   };
 
