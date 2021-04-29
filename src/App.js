@@ -14,7 +14,7 @@ class App extends React.Component {
     this.state = {
       todo: "",
       todos: [],
-      removed: "",
+      // removed: "",
     }
   }
 
@@ -35,10 +35,10 @@ class App extends React.Component {
 
   handleDelete = (index) => {
     const todos = [...this.state.todos]
-    const removed = todos.splice(index,1)
+    todos.splice(index,1)
     this.setState ({
       todos:todos,
-      removed:removed
+      // removed:removed
     })
   }
 
@@ -47,7 +47,7 @@ class App extends React.Component {
       <div className="app">
         <div>
           <Form handleInput={this.handleInput} handleKeyDown={this.handleKeyDown}/>
-          <Todos removed={this.removed} todos={this.state.todos} handleDelete={this.handleDelete}/>
+          <Todos todos={this.state.todos} handleDelete={this.handleDelete}/>
         </div>
         <div>
           <ToastContainer />

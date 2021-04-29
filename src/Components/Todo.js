@@ -11,7 +11,7 @@ export class todo extends Component {
 
     componentWillUnmount () {
         // const {todo} = this.props
-        toast.error(`Todo deleted: ${this.props.removed}`)
+        toast.error(`Todo deleted: ${this.props.todo}`)
     }
 
     render() {

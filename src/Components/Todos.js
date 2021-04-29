@@ -6,7 +6,7 @@ function Todos(props) {
 
     const list = todos.map((todo,i) => {
         return (
-            <Todo todo={todo} removed={removed} key={i} index={i} handleDelete={handleDelete}/>
+            <Todo todo={todo} removed={removed} key={todo} index={i} handleDelete={handleDelete}/>
         )
     })
     return (
