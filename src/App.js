@@ -1,5 +1,5 @@
 import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer} from "react-toastify";
 import Todos from "./Components/Todos"
 import Form from "./Components/Form"
 
@@ -12,9 +12,7 @@ class App extends React.Component {
     this.state = {
       todos: [],
       todo: "",
-      // removed: ""
     }
-    this.removed =""
   }
 
   handleInput = (e) => {
@@ -29,12 +27,10 @@ class App extends React.Component {
 
   handleDelete = (idx) => {
     const todos = [...this.state.todos]
-
-    this.removed = todos.splice(idx,1)
-    // this.setState({removed: removed[0] , todos})
+    todos.splice(idx,1)
     this.setState({todos})
-    
   }
+
 
 
   render() {
@@ -47,7 +43,6 @@ class App extends React.Component {
         <Todos
         handleDelete = {this.handleDelete}
         todos = {this.state.todos}
-        removed = {this.removed}
         />
         <ToastContainer />
         Give me something to do?!

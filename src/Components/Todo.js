@@ -8,17 +8,16 @@ export class Todo extends Component {
     }
 
     componentWillUnmount(){
-        const {removed } = this.props
-        toast.error(`Todo deleted: ${removed}`)
+        toast.error(`Todo deleted: ${this.props.todo}`)
     }
 
     render() {
-        const {todo, handleDelete} = this.props
+        const {todo, handleDelete, idx} = this.props
         return (
             <div>
                 <li>
                 {todo}
-                <button onClick={handleDelete}>x</button>
+                <button onClick={() => handleDelete(idx)} >x</button>
                 </li>
             </div>
         )
