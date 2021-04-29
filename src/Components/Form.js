@@ -5,7 +5,7 @@ export class Form extends Component {
         const {handleInput,handleKeyDown} = this.props
         return (
             <div>
-                <form onSubmit={handleKeyDown}>
+                <form onSubmit={handleKeyDown} className="Form">
                     <input onChange={handleInput}></input>
                 </form>
             </div>

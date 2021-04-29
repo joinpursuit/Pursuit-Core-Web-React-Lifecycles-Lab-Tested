@@ -17,7 +17,7 @@ export class todo extends Component {
     render() {
         const {todo,handleDelete} = this.props
         return (
-            <div>
+            <div className="todo">
                 {todo}
                 <button onClick={handleDelete}>X</button>
             </div>

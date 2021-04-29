@@ -51,7 +51,6 @@ class App extends React.Component {
         </div>
         <div>
           <ToastContainer />
-          Give me something to do?!
         </div>
       </div>
     );
