@@ -1,3 +1,37 @@
 .app {
-  text-align: center;
+  /* text-align: center; */
+}
+
+.Form {
+  margin: 1em;
+}
+.Form input {
+  width: 225px;
+  height: 30px;
+  padding: 10px;
+  margin-left: 20%;
+  border: 2px dotted black;
+}
+
+#todos {
+  border: 2px dotted black;
+  width: 250px;
+  height: 300px;
+  margin-left: 20%;
+}
+
+.todo {
+  padding: 10px;
+  text-transform: capitalize;
+  color: cornflowerblue;
+  font-size: 22px;
+  /* list-style: none; */
+}
+
+.todo button {
+  width: 40px;
+  padding: 2px;
+  margin-left: 10px;
+  border-radius: 25%;
+  color: cornflowerblue;
 }
