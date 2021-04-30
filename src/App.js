@@ -1,7 +1,9 @@
 import React from "react";
+import 'css-doodle';
 import { ToastContainer,toast } from "react-toastify";
 import { v4 as uuidv4 } from 'uuid';
-import Todo from './components/Todo'
+import Todos from './components/Todos'
+import Form from './components/Form'
 
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -12,67 +14,35 @@ class App extends React.Component {
     super(props)
     this.state={
       toDoList: [],
-      task: ''
+      task: ""
     }
   }
 
-  componentDidUpdate() {
-    // toast("App did update. Yay!");
-    // console.log("---------------------");
-  }
-
   taskCreator=(e)=>{
-    const {value} = e.target
-    this.setState({
-      task: value
-    })
+    const task = e.target.value
+    this.setState({task})
   }
 
   addTask=(e)=>{
-    //console.log('Task Added')
-    e.preventDefault()
-    const task = this.state.task
+   e.preventDefault()
     this.setState({
-      toDoList : [...this.state.toDoList, task]
+      toDoList: this.state.toDoList.concat(this.state.task)
     })
-
   }
 
- removeTask=(id)=>{
-  console.log('Task Removed')
-  console.log(id)
+ removeTask=(idx)=>{
   const toDoList = [...this.state.toDoList]
-
-  
-  
-
+  toDoList.splice(idx,1);
+  this.setState({toDoList})
  }
 
 
-  render() {
-    const toDoList = this.state.toDoList
-    const newList = toDoList.map((toDo,i)=>{
-      return(
-        <Todo 
-        key = {i}
-        id = {uuidv4()}
-        toast ={toast}
-        toDo={toDo}
-        toDoList={toDoList}
-        removeTask = {this.removeTask}
-        />
-      )
-    })
+ render () {
     return (
       <div className="app">
+        <Form taskCreator={this.taskCreator} addTask={this.addTask}/>
+        <Todos toDoList={this.state.toDoList} removeTask={this.removeTask} uuidv4={uuidv4} toast ={toast}/>
         <ToastContainer />
-        <form onSubmit={this.addTask}>
-
-          <input type="text" placeholder="Enter a ToDo" onChange={this.taskCreator}/>
-        </form>
-        <ul id="todos">
-          {newList}
-        </ul>
       </div>
     );
   }

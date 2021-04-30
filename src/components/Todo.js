@@ -1,40 +1,46 @@
-import { Component } from 'react'
+import React from 'react'
 
+class ToDo extends React.Component {
+  constructor (props) {
+    super(props)
+  }
+  componentDidMount () {
+    console.log('+++++++++++++++++++++++++++++++++')
+    console.log(`${this.props.task} DID MOUNT`)
+    this.props.toast.success(`New todo added: ${this.props.task}`, {
+      position: this.props.toast.POSITION.BOTTOM_RIGHT
+    });
+    this.props.toast(`Remaining todos: ${this.props.toDoList.length}`, {
+      position: this.props.toast.POSITION.BOTTOM_RIGHT
+    });
+    console.log('+++++++++++++++++++++++++++++++++')
+  }
 
+  componentWillUnmount () {
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+    console.log(`${this.props.task} WILL UNMOUNT`)
+    this.props.toast.error(`Todo deleted: ${this.props.task}`, {
+      position: this.props.toast.POSITION.BOTTOM_LEFT
+    });
+    this.props.toast(`Remaining todos: ${this.props.toDoList.length - 1}`, {
+      position: this.props.toast.POSITION.BOTTOM_LEFT
+    });
+    console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+  }
 
-class Todo extends Component {
-    constructor(props){
-        super(props)  
-   
-    }
-
-    componentDidMount() {
-        console.log(`${this.props.id} DID MOUNT`);
-        this.props.toast.success(`New todo created: ${this.props.toDo}`);
-        console.log("---------------------");
-      }
-    
-    //   componentDidUpdate(prevProps, prevState) {
-    //     console.log(`${this.props.id} DID UPDATE
-    //     ${prevProps.toDoList} -> ${this.props.toDoList}`);
-    //   }
-
-    componentWillUnmount() {
-        console.log(`${this.props.id} WILL UNMOUNT`);
-        
-      }
-
-
-    render() {
-        const {toDo, removeTask,toast} = this.props
-        return (
-
-            <li>
-                <h1>{toDo}</h1><button onClick={()=>removeTask(this.props.id)}>-</button>
-            </li>
-
-        )
-    }
+  render () {
+    const { task, removeTask, idx } = this.props
+    return (
+      <li>
+        <div className="divCenter">
+          <h1>{task}</h1>
+          <br />
+          <button onClick={() => {removeTask(idx)}}>x</button>
+        </div>
+      
+      </li>
+    )
+  }
 }
 
-export default Todo
+export default ToDo
