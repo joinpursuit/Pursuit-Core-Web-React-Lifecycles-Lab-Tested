@@ -20,7 +20,9 @@ class App extends React.Component {
 		this.setState({ list: removeArr });
   };
 
-
+  componentDidUpdate(){
+    toast(`Remaining todos: ${this.state.list.length}`);
+  }
   render() {
     return (
       <div className="app">
