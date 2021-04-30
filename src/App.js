@@ -31,7 +31,8 @@ class App extends React.Component {
 
 
   removed = (id) => {
-    const todos = this.state.todos.filter((input) => input.id !== id)
+    const todos = [...this.state.todos]
+    todos.splice(id,1)
     this.setState({
       todos
     })

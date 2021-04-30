@@ -16,8 +16,10 @@ export class Todo extends Component {
         return (
             <div>
                 <li>
+                <div key={id}>
                 {todo}
                 <button onClick={() => removed(id)} >x</button>
+                </div>
                 </li>
             </div>
         )

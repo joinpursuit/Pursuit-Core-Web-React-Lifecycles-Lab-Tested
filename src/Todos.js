@@ -12,7 +12,7 @@ function Todos(props) {
             <ul id="todos">
                 {todos.map((todo, i)=> {
                      return (
-                     <Todo todo={todo} key = {todo.id} removed={removed} idx={i} />
+                     <Todo todo={todo} key = {todo} removed={removed} idx={i} />
                      );
                     })}
             </ul>
