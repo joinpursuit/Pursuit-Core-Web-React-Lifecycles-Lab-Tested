@@ -8,6 +8,33 @@
     <title>React App</title>
   </head>
   <body>
+    <css-doodle grid="5" class="doo">
+  
+      :doodle {
+        position: absolute;
+        z-index: -1;
+        min-width: 650px;
+        height: 650px;
+        margin-left: 400px;
+        size: 200vmin;
+        min-size: 500px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: inset 0 0 2vmax rgba(0, 0, 0, .1);
+      }
+    
+      size: 50% 120%;
+      border-radius: 50%;
+    
+      border: @rand(10px) solid  hsla(
+        calc(-450 + 5 * @index()), 80%, 60%, @rand(.8)
+      );
+    
+      transform:
+        scaleX(@rand(5, 8))
+        rotate(@pick(45deg, 60deg, 90deg));
+    
+    </css-doodle>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
   </body>
