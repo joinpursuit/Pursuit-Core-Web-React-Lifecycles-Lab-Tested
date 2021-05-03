@@ -8,7 +8,7 @@ export default function Todo(props) {
     })
     return (
         <div>
-            <ul>
+            <ul id='todos'>
                 {list}
             </ul>
         </div>

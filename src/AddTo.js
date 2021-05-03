@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 import {toast} from 'react-toastify'
 
-
-
 export default class AddTo extends Component {
 
 componentDidMount() {
-    toast.success(`New To-do added: ${this.props.input}`)
+    toast.success(`New todo added: ${this.props.input}`)
 }
 
 componentWillUnmount() {
-    toast.error(`To-do completed: ${this.props.input}`)
+    toast.error(`Todo deleted: ${this.props.input}`)
 }
     render() {
         const { input, handleDelete, idx} = this.props
