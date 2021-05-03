@@ -7,7 +7,7 @@ class Todo extends Component {
     }
 
     componentWillUnmount(){
-        // toast.success(`New todo removed: ${this.props.todo.text}`)
+        toast.error(`Todo deleted: ${this.props.todo.text}`)
     }
     render() {
         const {todo, remove} = this.props
