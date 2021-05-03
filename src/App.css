@@ -1,3 +1,17 @@
 .app {
   text-align: center;
+  font-family: cursive;
+  font-size: 25px;
+  width: 800px;
+  margin: auto;
+  height: 800px;
+  background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+}
+
+h2 {
+  font-size: 40px;
+}
+
+ul{
+  list-style: none;
 }
