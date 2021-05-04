@@ -9,8 +9,8 @@ class App extends React.Component {
     return (
       <div className="app">
         <ToDoList/>
-        <ToastContainer />
-        
+        <ToastContainer className="Toastify__toast--success" />
+        <ToastContainer className="Toastify__toast--error"/>
       </div>
     );
   }

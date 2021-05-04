@@ -22,7 +22,7 @@ See its README.md for example usage; you might find the [react-toastify gist](ht
 
 ![todos react app in use](./todosLifecycleAppGif.gif)
 
-### Bonus
+### Bonus 
 
 Use `componentDidUpdate` in `App` to show a toast with the text `Remaining todos: {count}` whenever the count of todos changes.
 

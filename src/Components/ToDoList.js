@@ -1,30 +1,53 @@
 import React from "react";
 import ToDo from "./ToDo";
+import 'react-toastify/dist/ReactToastify.css';
 
 class ToDoList extends React.Component {
-  state = { input: "" , listOfToDos: []};
+  state = { input: "", listOfToDos: [] };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState((prevState)=>{
-        return { listOfToDos: [this.input,...prevState.listOfToDos]}
-    })
+    this.setState((prevState) => {
+      return { listOfToDos: [this.state.input, ...prevState.listOfToDos] };
+    });
+    this.setState({ input: "" });
   };
 
   handleInput = (e) => {
-      console.log(e)
-    const { name,value } = e.target
-    this.setState({[name]: value})
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
   };
 
+  handleDeleteListItem = (e) => {
+    const { name } = e.target;
+    const { listOfToDos } = this.state;
+    this.setState({
+      listOfToDos: listOfToDos.filter((todo) => {
+        return todo !== name;
+      }),
+    });
+  };
+
+ 
+
   render() {
-      console.log(this.state.input)
-      const { input} = this.state
+    const { input, listOfToDos} = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <input name="input" value={input} onChange={this.handleInput} />
-        <ToDo handleSubmit={this.handleSubmit} />
-      </form>
+      <section>
+        <form onSubmit={this.handleSubmit}>
+          <input name="input" value={input} onChange={this.handleInput} />
+        </form>
+        {listOfToDos.map((todo) => {
+            return (
+              <ToDo
+                key={todo}
+                todo={todo}
+                handleDeleteListItem={this.handleDeleteListItem}
+              />
+            );
+          })}
+
+      </section>
     );
   }
 }
