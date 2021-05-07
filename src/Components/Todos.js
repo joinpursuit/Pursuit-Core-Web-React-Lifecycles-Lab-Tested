@@ -14,6 +14,10 @@ class Todos extends React.Component {
     addTodo(this.state.input);
     this.setState({ input: "" });
   };
+
+  componentDidMount() {
+    
+  }
   render() {
     const { input } = this.state;
     return (
