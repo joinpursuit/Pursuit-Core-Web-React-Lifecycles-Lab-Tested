@@ -1,41 +1,39 @@
-import React from "react";
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from "react-toastify";
 import Form from './Components/Form';
 import Todos from './Components/Todos';
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-class App extends React.Component {
-  state = { list: [] };
+const App = () => {
+  const [list, setList] = useState([])
 
-  addToDo = (todo) => {
-    const Todo = { name: todo };
-		this.setState((prevState) => ({
-			list: [...prevState.list, Todo],
-		}));
+  const addToDo = (todo) => {
+    setList((prevList) => ([...prevList, todo]))
 	};
 
-  removeTodo = (name) => {
-		const removeArr = this.state.list.filter((todo) => todo.name !== name);
-		this.setState({ list: removeArr });
+  const removeTodo = (name) => {
+		const removeArr = list.filter((todo) => todo !== name);
+    setList(removeArr)
   };
 
-  componentDidUpdate(){
-    toast(`Remaining todos: ${this.state.list.length}`);
-  }
-  render() {
+  useEffect(() => {
+    toast(`Remaining todos: ${list.length}`);
+  })
+  
+  
     return (
       <div className="app">
         <ToastContainer />
-        <Form addToDo={this.addToDo}/>
+        <Form addToDo={addToDo}/>
         <ul id="todos">
-					{this.state.list.map((todo) => (
-						<Todos todo={todo} removeTodo={this.removeTodo} key={todo.name}/>
+					{list.map((todo) => (
+						<Todos todo={todo} removeTodo={removeTodo} key={todo}/>
 					))}
 				</ul>
       </div>
     );
   }
-}
+
 
 export default App;
