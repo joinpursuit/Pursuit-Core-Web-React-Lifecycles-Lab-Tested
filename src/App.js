@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
@@ -6,32 +6,25 @@ import TodoList from "./Components/TodoList";
 import TodoForm from "./Components/TodoForm";
 toast.configure()
 
-class App extends React.Component {
-state = { todos: [] };
+const App = () => {
+const [todos, setTodo] = useState([])
 
-  addTodo = (todo) => {
-    this.setState((prevState) => {
-      return { todos: [...prevState.todos, todo] };
-    });
-  };
-  
+const addTodo = (todo) => {
+  setTodo((prevTodo) => [...prevTodo, todo]);
+}
  
-  removeTodo = (id) => {
-    const filterArr = this.state.todos.filter((input) => input.id !== id)
-    this.setState({todos: filterArr})
+ const removeTodo = (id) => {
+    const filterArr = todos.filter((input) => input.id !== id)
+    setTodo(filterArr)
   }
 
 
-
-  render() {
-    const { todos } = this.state;
     return (
       <div className={"TodoContainer"}>
-        <TodoForm toast={ToastContainer} addTodo={this.addTodo} />
-        <TodoList removeTodo={this.removeTodo} todos={todos}/>
+        <TodoForm toast={ToastContainer} addTodo={addTodo} />
+        <TodoList removeTodo={removeTodo} todos={todos}/>
       </div>
     );
-  }
 }
 
 
