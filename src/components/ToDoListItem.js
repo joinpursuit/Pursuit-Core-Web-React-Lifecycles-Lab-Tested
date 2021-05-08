@@ -1,29 +1,20 @@
-import React, { Component } from "react";
+import { useEffect } from "react";
 
-class ToDoListItem extends Component {
-  constructor(props) {
-    super(props);
-  }
+const ToDoListItem = ({ toast, toDo, removeToDos }) => {
 
-  componentDidMount() {
-    const { toast, toDo } = this.props;
+  useEffect(() => {
     toast.success(`New todo added: ${toDo.text}`);
-  }
+    return () => {
+      toast.error(`Todo deleted: ${toDo.text}`);
+    };
+  }, []);
 
-  componentWillUnmount() {
-    const { toast, toDo } = this.props;
-    toast.error(`Todo deleted: ${toDo.text}`);
-  }
-
-  render() {
-    const { toDo, removeToDos } = this.props;
-    return (
-        <li>
-          {toDo.text}
-          <button onClick={() => removeToDos(toDo.id)}>X</button>
-        </li>
-    );
-  }
-}
+  return (
+    <li>
+      {toDo.text}
+      <button onClick={() => removeToDos(toDo.id)}>X</button>
+    </li>
+  );
+};
 
 export default ToDoListItem;

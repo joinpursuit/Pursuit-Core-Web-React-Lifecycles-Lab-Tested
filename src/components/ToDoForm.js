@@ -1,32 +1,27 @@
-import React, { Component } from 'react'
+import {useState} from 'react'
 import uuid from 'react-uuid'
 
-class ToDoForm extends React.Component {
-    state = { Todo: ""}
+const ToDoForm = ({addToDo}) => {
+    const [Todo, setTodo] = useState("")
 
-    handleInputChange = (e) => {
-        this.setState({Todo: e.target.value})
+    const handleInputChange = (e) => {
+        setTodo(e.target.value)
     }
 
-    handleSubmit = (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        const { addToDo } = this.props;
-        const newToDo = {id: uuid(), text: this.state.Todo}
+        const newToDo = {id: uuid(), text: Todo}
         addToDo(newToDo);
-        this.setState({Todo: ""})
+        setTodo("")
     }
-
-
-    render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
-                <label htmlFor="itemInput"></label>
-                <input  onChange={this.handleInputChange} id="itemInput" placeholder="Enter a Todo" value={this.state.Todo} />
-            </form>
+                <form onSubmit={handleSubmit}>
+                    <label htmlFor="itemInput"></label>
+                    <input  onChange={handleInputChange} id="itemInput" placeholder="Enter a Todo" value={Todo} />
+                </form>
             </div>
         )
-    }
 }
 
 export default ToDoForm; 
