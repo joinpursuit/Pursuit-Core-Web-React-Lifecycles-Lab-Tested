@@ -1,32 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 
+const Todos = ({addToDo}) => {
+  const [input, setInput] = useState("");
 
-class Todos extends React.Component{
-    state = { input: "" }
+  const handleInput = (e) => {
+    setInput(e.target.value)
+  }
 
-    handleInput = (e) => {
-        this.setState({ input: e.target.value })
-    }
+  const handleSubmit = (e) => {
+            e.preventDefault();
+            addToDo(input)
+            setInput("")
+        }
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        const { addToDo } = this.props
-        addToDo(this.state.input)
-        this.setState({input: ""})
+  return (
+    <section>
+      <form onSubmit={handleSubmit}>
+        <input
+          onChange={handleInput}
+          value={input}
+          placeholder="Enter a Todo"
+        />
+      </form>
+    </section>
+  );
+};
 
-    }
-    render(){
-        const { input } = this.state
-        return(
-            <section>
-                <form onSubmit={this.handleSubmit}>
-                    <input onChange={this.handleInput} value={input} placeholder="Enter a Todo"/>
-                </form>
+// class Todos extends React.Component{
+//     state = { input: "" }
 
-            </section>
-        )
-    }
+//     handleInput = (e) => {
+//         this.setState({ input: e.target.value })
+//     }
 
-}
+//     handleSubmit = (e) => {
+//         e.preventDefault();
+//         const { addToDo } = this.props
+//         addToDo(this.state.input)
+//         this.setState({input: ""})
 
-export default Todos
+//     }
+//     render(){
+//         const { input } = this.state
+//         return(
+//             <section>
+//                 <form onSubmit={this.handleSubmit}>
+//                     <input onChange={this.handleInput} value={input} placeholder="Enter a Todo"/>
+//                 </form>
+
+//             </section>
+//         )
+//     }
+
+// }
+
+export default Todos;

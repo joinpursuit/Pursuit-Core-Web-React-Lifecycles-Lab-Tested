@@ -10,7 +10,7 @@ const TodoList = ({todos, removeTodo}) => {
 
         <ul id="todos">
             {todos.map((todo) => {
-                return <TodoItem 
+                return <TodoItem key={todo.id}
                         todo={todo}
                         // id={todo.id} 
                         // todo={todo.text} 
