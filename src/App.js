@@ -1,20 +1,15 @@
 import React from "react";
 
-import Todos from "./Components/Todos";
-
+import TodosHooks from "./Components/TodosHooks";
 
 import "./App.css";
 
-class App extends React.Component {
-  
-  render() {
-    return (
-      <div className="app">
-       
-        <Todos />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="app">
+      <TodosHooks />
+    </div>
+  );
+};
 
 export default App;
