@@ -1,55 +1,55 @@
-import React from "react";
-import { ToastContainer } from "react-toastify";
-import Todo from "./Todo"
+import { useState, useEffect } from 'react';
+import { ToastContainer, toast } from "react-toastify";
+import Todo from './Todo';
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-class App extends React.Component {
-  state = {
-    userInput: "",
-    todos: [],
+const App = () => {
+  const [list, setList] = useState([])
+
+  const addToDo = (todo) => {
+    setList((prevList) => ([...prevList, todo]))
+	};
+
+  const removeTodo = (name) => {
+		const removeArr = list.filter((todo) => todo !== name);
+    setList(removeArr)
   };
 
-  onSubmit = (e) => {
-    e.preventDefault();
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        {
-          id: this.state.todos.length,
-          text: this.state.userInput,
-        },
-      ],
-    });
-  };
+  const Form = ({addToDo}) => {
+    const [input, setInput] = useState('')
 
-  removeTodo(index) {
-    const todos = this.state.todos.filter((todo, todoIndex) => {
-      return todoIndex !== index
-    })
-    this.setState({ todos })
-  }
+    const handleSubmit = (e) => { 
+        e.preventDefault();
+        addToDo(input);
+        setInput('')
 
-  render() {
+    }
+
+    const handleInput = (e) => [
+        setInput(e.target.value)
+    ]
+    
+        return (
+            <form onSubmit={handleSubmit}>
+            <input name='input' value={input} placeholder='Enter a ToDo' onChange={handleInput} />
+            </form>
+        )
+    
+}
+  
     return (
       <div className="app">
         <ToastContainer />
-        <form onSubmit={this.onSubmit}>
-          <input
-            onChange={(e) => this.setState({ userInput: e.target.value })}
-            placeholder="Enter a Todo"
-          />
-        </form>
-        <div id="todos">
-          {this.state.todos.map((todo) => (
-            <Todo key={`${todo.id}`} onClose={() => this.removeTodo(todo.id)}>
-              {todo.text}
-            </Todo>
-          ))}
-        </div>
+        <Form addToDo={addToDo}/>
+        <ul id="todos">
+					{list.map((todo) => (
+						<Todo todo={todo} removeTodo={removeTodo} key={todo}/>
+					))}
+				</ul>
       </div>
     );
   }
-}
+
 
 export default App;
