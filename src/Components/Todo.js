@@ -1,14 +1,27 @@
 import React from "react";
+import { toast } from "react-toastify";
 
-function Todo({ input, todos }) {
-  return (
-    <ul>
-      <li>
-        {todos.text}
-        <button>x</button>
+class Todo extends React.Component {
+  componentDidMount() {
+    const { todo } = this.props;
+    console.log(toast);
+    toast.success(`New todo added: ${todo.text}`);
+  }
+
+  componentWillUnmount() {
+    const { todo } = this.props;
+    toast.error(`Todo deleted: ${todo.text}`);
+  }
+
+  render() {
+    const { todo, deleteToDo } = this.props;
+    return (
+      <li className="todos">
+        {todo.text}
+        <button onClick={() => deleteToDo(todo)}>x</button>
       </li>
-    </ul>
-  );
+    );
+  }
 }
 
 export default Todo;

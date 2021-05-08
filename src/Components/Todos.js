@@ -1,13 +1,19 @@
 import React from "react";
 import Todo from "./Todo";
 
+
 class Todos extends React.Component {
+
+
+
+
+
   render() {
-    const { input, todos } = this.props;
+    const { todos, deleteToDo } = this.props;
     return (
-      <ul>
+      <ul id="todos">
         {todos.map((todo) => {
-          return <Todo input={input} todos={todos} />;
+          return <Todo todo={todo} deleteToDo={deleteToDo} key={todo.text}/>;
         })}
       </ul>
     );

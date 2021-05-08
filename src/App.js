@@ -5,32 +5,39 @@ import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 import Form from "./Components/Form";
 
+
 class App extends React.Component {
   state = {
-    todos: [{ id: 1, text: "", completed: true }],
+    todos: [],
     input: "",
   };
 
   handleChange = (e) => {
     const { value } = e.target;
     this.setState({ input: value });
-    debugger
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
- 
+
     const { input } = this.state;
-    const newToDo = { id: 1, text: input, completed: true };
+    const newToDo = { text: input };
     this.addToDo(newToDo);
     this.setState({ input: "" });
-       debugger;
   };
 
   addToDo = (todo) => {
     this.setState((prevState) => {
       return { todos: [...prevState.todos, todo] };
     });
+  };
+
+  deleteToDo = (item) => {
+    const { todos } = this.state;
+    const filterArr = todos.filter((todo) => {
+      return item.text !== todo.text;
+    });
+    this.setState({ todos: filterArr });
   };
 
   render() {
@@ -44,7 +51,7 @@ class App extends React.Component {
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
-        <Todos input={input} todos={todos} />
+        <Todos todos={todos} deleteToDo={this.deleteToDo} />
       </div>
     );
   }
