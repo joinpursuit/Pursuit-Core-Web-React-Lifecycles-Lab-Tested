@@ -1,14 +1,14 @@
 import React from "react";
 import Todos from "./Todos";
 import TodoListItem from "./TodoListItem";
+import { toast } from "react-toastify";
 
-let uuid = 1;
 class TodoList extends React.Component {
   state = { todos: [] };
 
   addTodo = (listItem) => {
-    const newTodo = { id: uuid++, type: listItem };
-    this.setState((prevState) => ({ todos: [newTodo, ...prevState.todos] }));
+    // const newTodo = { id: listItem, type: listItem };
+    this.setState((prevState) => ({ todos: [...prevState.todos, listItem] }));
   };
 
   removeTodo = (id) => {
@@ -20,8 +20,8 @@ class TodoList extends React.Component {
     const { todos } = this.state;
     return (
       <div>
-        <Todos addTodo={this.addTodo} />
-        <TodoListItem removeTodo={this.removeTodo} todos={todos} />
+        <Todos addTodo={this.addTodo} todos={todos}/>
+        <TodoListItem removeTodo={this.removeTodo} todos={todos} toast={toast}/>
       </div>
     );
   }

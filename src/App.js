@@ -11,7 +11,6 @@ class App extends React.Component {
       <div className="app">
         <ToastContainer />
         <TodoList />
-        {/* Give me something to do?! */}
       </div>
     );
   }

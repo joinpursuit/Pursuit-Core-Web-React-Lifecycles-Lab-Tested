@@ -1,18 +1,20 @@
-import React from 'react'
+import React from "react";
+import SeparateLi from './SeparateLi'
 
+class TodoListItem extends React.Component {
 
-const TodoListItem = ({todos, removeTodo}) => {
-
-    console.log({todos})
-    return(<ul>
+ 
+  render() {
+    const { todos, removeTodo, toast } = this.props;
+    return (
+      <ul id='todos'>
         {todos.map((todo) => {
-          return <li key={todo.id} id="todos">
-              {todo.type}
-          <button onClick={() => removeTodo(todo.id)}>-</button>
-          </li>;
+          return <SeparateLi  removeTodo={removeTodo} todo={todo} toast={toast} key={todo.id}/>
         })}
       </ul>
-      )
+    )
+  }
 }
-
-export default TodoListItem
+  
+  export default TodoListItem;
+  

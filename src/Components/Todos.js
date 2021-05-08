@@ -1,6 +1,8 @@
 import React from "react";
 // import TodoListItem from './TodoListItem'
+// import {  toast } from "react-toastify";
 
+let uuid = 1
 class Todos extends React.Component {
   state = { input: "" };
 
@@ -10,14 +12,12 @@ class Todos extends React.Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    const newTodo = { id: uuid++, type: this.state.input};
     const { addTodo } = this.props;
-    addTodo(this.state.input);
+    addTodo(newTodo);
     this.setState({ input: "" });
   };
 
-  componentDidMount() {
-    
-  }
   render() {
     const { input } = this.state;
     return (
