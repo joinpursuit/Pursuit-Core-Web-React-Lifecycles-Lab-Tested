@@ -1,30 +1,26 @@
-import React from "react";
 import Todos from "./Todos";
 import TodoListItem from "./TodoListItem";
 import { toast } from "react-toastify";
+import React, { useState } from "react";
 
-class TodoList extends React.Component {
-  state = { todos: [] };
+const TodoList = () => {
+  const [todos, setTodos]  = useState([])
 
-  addTodo = (listItem) => {
-    // const newTodo = { id: listItem, type: listItem };
-    this.setState((prevState) => ({ todos: [...prevState.todos, listItem] }));
+ const  addTodo = (listItem) => {
+    setTodos((prevTodos) => ( [...prevTodos, listItem] ));
   };
 
-  removeTodo = (id) => {
-    const filterArr = this.state.todos.filter((todo) => todo.id !== id);
-    this.setState({ todos: filterArr });
+  const removeTodo = (id) => {
+    const filterArr = todos.filter((todo) => todo.id !== id);
+    setTodos(filterArr );
   };
 
-  render() {
-    const { todos } = this.state;
     return (
       <div>
-        <Todos addTodo={this.addTodo} todos={todos}/>
-        <TodoListItem removeTodo={this.removeTodo} todos={todos} toast={toast}/>
+        <Todos addTodo={addTodo} todos={todos}/>
+        <TodoListItem removeTodo={removeTodo} todos={todos} toast={toast}/>
       </div>
     );
-  }
 }
 
 export default TodoList;

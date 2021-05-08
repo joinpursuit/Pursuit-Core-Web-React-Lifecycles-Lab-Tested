@@ -1,33 +1,27 @@
-import React from "react";
-// import TodoListItem from './TodoListItem'
-// import {  toast } from "react-toastify";
+import React, { useState } from "react";
 
-let uuid = 1
-class Todos extends React.Component {
-  state = { input: "" };
+let uuid = 1;
+const Todos = ({ addTodo }) => {
+  const [input, setInput] = useState("");
 
-  handleInput = (e) => {
-    this.setState({ input: e.target.value });
+  const handleInput = (e) => {
+    setInput(e.target.value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodo = { id: uuid++, type: this.state.input};
-    const { addTodo } = this.props;
+    const newTodo = { id: uuid++, type: input };
     addTodo(newTodo);
-    this.setState({ input: "" });
+    setInput("");
   };
 
-  render() {
-    const { input } = this.state;
-    return (
-      <div>
-        <form onSubmit={this.handleSubmit}>
-          <input onChange={this.handleInput} value={input} />
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input onChange={handleInput} value={input} />
+      </form>
+    </div>
+  );
+};
 
 export default Todos;
