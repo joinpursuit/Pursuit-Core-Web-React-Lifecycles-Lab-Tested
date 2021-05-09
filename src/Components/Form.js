@@ -1,4 +1,4 @@
-import React from "react";
+//React Hooks Lab: refactored to Hooks
 
 const Form = ({ input, handleChange, handleSubmit }) => {
 

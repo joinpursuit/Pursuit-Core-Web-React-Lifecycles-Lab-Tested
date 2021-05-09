@@ -1,4 +1,5 @@
-import React from "react";
+//React Hooks Lab: refactored to Hooks
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
 import Todos from "./Components/Todos";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
@@ -6,55 +7,47 @@ import "./App.css";
 import Form from "./Components/Form";
 
 
-class App extends React.Component {
-  state = {
-    todos: [],
-    input: "",
-  };
+const App = () => {
+  const [todos, setTodos ] = useState([])
+  const [input, setInput] = useState("")
 
-  handleChange = (e) => {
+  const handleChange = (e) => {
     const { value } = e.target;
-    this.setState({ input: value });
+    setInput(value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-
-    const { input } = this.state;
     const newToDo = { text: input };
-    this.addToDo(newToDo);
-    this.setState({ input: "" });
+    addToDo(newToDo);
+    setInput("");
   };
 
-  addToDo = (todo) => {
-    this.setState((prevState) => {
-      return { todos: [...prevState.todos, todo] };
+  const addToDo = (todo) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, todo];
     });
   };
 
-  deleteToDo = (item) => {
-    const { todos } = this.state;
+  const deleteToDo = (item) => {
     const filterArr = todos.filter((todo) => {
       return item.text !== todo.text;
     });
-    this.setState({ todos: filterArr });
+    setTodos(filterArr)
   };
 
-  render() {
-    const { input, todos } = this.state;
     return (
       <div className="App">
         <ToastContainer />
         <h4>Give me something to do?!</h4>
         <Form
           input={input}
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
-        <Todos todos={todos} deleteToDo={this.deleteToDo} />
+        <Todos todos={todos} deleteToDo={deleteToDo} />
       </div>
     );
   }
-}
 
 export default App;

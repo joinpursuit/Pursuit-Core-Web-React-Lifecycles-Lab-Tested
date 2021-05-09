@@ -1,23 +1,15 @@
-import React from "react";
+//React Hooks Lab: refactored to Hooks
 import Todo from "./Todo";
 
+const Todos = ({ todos, deleteToDo }) => {
 
-class Todos extends React.Component {
-
-
-
-
-
-  render() {
-    const { todos, deleteToDo } = this.props;
-    return (
-      <ul id="todos">
-        {todos.map((todo) => {
-          return <Todo todo={todo} deleteToDo={deleteToDo} key={todo.text}/>;
-        })}
-      </ul>
-    );
-  }
-}
+  return (
+    <ul id="todos">
+      {todos.map((todo) => {
+        return <Todo todo={todo} deleteToDo={deleteToDo} key={todo.text} />;
+      })}
+    </ul>
+  );
+};
 
 export default Todos;
