@@ -21,32 +21,33 @@ class App extends React.Component {
     }
   }
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    
-    const todos = [...this.state.todos]
-    const input = this.state.input
-
-
-    this.setState({
-      todos: [...todos, input],
-    })
-    e.target.reset()
-  }
   handleInput = (e) => {
     const input = e.target.value
 
     this.setState({ input })
   }
-  removeTodo = (index) => {
+  handleSubmit = (e) => {
+    e.preventDefault()
+    
     const todos = [...this.state.todos]
+    const id = uuid()
+    const text = this.state.input
+    const todo = {id, text}
 
+    this.setState({
+      todos: [...todos, todo],
+      input: ''
+    })
+    e.target.reset()
+  }
+  removeTodo = (id) => {
+    const todos = [...this.state.todos]
+    const idx = todos.findIndex((todo) => todo.id === id)
 
-    todos.splice(index, 1)
+    todos.splice(idx, 1)
     this.setState({
       todos: todos,
     })
-    console.log('removeTodo has been pressed', this.state.id)
   }
 
 
@@ -55,7 +56,7 @@ class App extends React.Component {
     const todos = [...this.state.todos]
 
     const myTodos = todos.map((todo, index) => {
-      return <Todo key={todo.keyId} id='todo' index={index} todo={todo} removeTodo={this.removeTodo} />
+      return <Todo id='todo' key={todo.id} index={index} todo={todo} removeTodo={this.removeTodo} />
     })
 
     return (

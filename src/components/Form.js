@@ -13,9 +13,4 @@ export default class Form extends Component {
             </div>
         )
     }
-    componentDidMount() {
-        this.setState({
-            input: ''
-        })
-    }
 }

@@ -3,23 +3,24 @@ import { toast } from "react-toastify";
 
 
 export default class Todo extends Component {
-    
+
     
     render() {
-        console.log(`Component ${this.props.index}`)
+
+        const { todo, removeTodo } = this.props
+        
         return (
             <div id='todos'>
-                <p>{this.props.todo}</p>
-                <button onClick={() => this.props.removeTodo(this.props.index)}>x</button>
+                <p>{todo.text}</p>
+                <button onClick={() => removeTodo(todo.id)}>x</button>
             </div>
         )
     }
     componentDidMount() {
-        toast.success(`New todo added: ${this.props.todo}`)
+        toast.success(`New todo added: ${this.props.todo.text}`)
     }
     componentWillUnmount() {
-        console.log(`This todo has been unmounted: ${this.props.todo}`)
-        toast.error(`Todo deleted: ${this.props.todo}`)
+        console.log(`This todo has been unmounted: ${this.props.todo.text}`)
+        toast.error(`Todo deleted: ${this.props.todo.text}`)
     }
-
 }
