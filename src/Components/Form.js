@@ -1,11 +1,13 @@
 import React from 'react'
 
-function Form() {
-   return (
-      <div>
-         <form action=""></form>
-      </div>
-   )
+const Form = ({ handleSubmit, handleChange }) => {
+	return (
+		<div>
+			<form onSubmit={handleSubmit}>
+				<input onChange={handleChange} type='text' placeholder='Just do it, like Nike' />
+			</form>
+		</div>
+	)
 }
 
 export default Form
