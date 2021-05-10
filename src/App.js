@@ -1,60 +1,55 @@
 import React from "react";
+import Form from './Components/Form';
+import Todo from './Components/Todo';
 import { ToastContainer } from "react-toastify";
-import Todo from './Todo';
-import { v4 as uuid } from 'uuid'
+import { v4 as uuid } from 'uuid';
 
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
 class App extends React.Component {
-  constructor(){
-    super()
-    this.state={
-      newTodo: '',
-      todos:[]
-    }
+  state = {
+    todos: [],
+    todo: ''
   }
 
-  handleChange = (e) =>{
-    const { name, value } = e.target
+  handleChange = (e) => {
     this.setState({
-      [name]: value
+      todo: e.target.value
     })
   }
 
-  handleSubmit = (e) =>{
+  handleSubmit = (e) => {
     e.preventDefault()
-    const todo = {
+    const newTodo = {
       id: uuid(),
-      text: this.state.newTodo
+      text: this.state.todo
     }
+
     this.setState({
-      // keep whatever is there, and just add todo at the end
-      todos: [...this.state.todos, todo]
+      todos: [...this.state.todos, newTodo]
     })
   }
 
-  remove = (id) =>{
+  remove = (id) => {
     this.setState({
-      todos: this.state.todos.filter((todo)=>todo.id !== id),
+      todos: this.state.todos.filter((newTodo) => newTodo.id !== id)
     })
   }
 
 
   render() {
-    const { newTodo, todos } = this.state
+    const { todos } = this.state
+    const listItem = todos.map(todo => {
+      return <Todo todo={todo} remove={this.remove} key={todo.id} />
+    })
 
     return (
       <div className="app">
         <ToastContainer />
-        <form onSubmit={this.handleSubmit}>
-          {/* what you see in the input should be dictaed by whatever is held in this.state */}
-          <input type='text' value={newTodo} name='newTodo' onChange={this.handleChange}/>
-        </form>
+        <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
         <ul id='todos'>
-          {todos.map(todo=>{
-            return <Todo key={todo.id} todo={todo} remove={this.remove}/>
-          })}
+          {listItem}
         </ul>
       </div>
     );
