@@ -1,7 +1,7 @@
 import React from "react";
 import Form from './Components/Form';
 import Todo from './Components/Todo';
-import { ToastContainer } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { v4 as uuid } from 'uuid';
 
 import "../node_modules/react-toastify/dist/ReactToastify.css";
@@ -11,6 +11,11 @@ class App extends React.Component {
   state = {
     todos: [],
     todo: ''
+  }
+
+  componentDidUpdate() {
+    const count = this.state.todos.length
+    toast(`Remaining todos: ${count}`)
   }
 
   handleChange = (e) => {
