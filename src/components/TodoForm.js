@@ -1,30 +1,25 @@
-import React from "react";
-
+import { useState } from "react";
 let idItem = 1;
 
-class TodoForm extends React.Component {
-  state = { input: "" };
+const TodoForm = ({ addTodo }) => {
+  const [input, setInput] = useState("");
 
-  handleChange = (e) => {
-    this.setState({ input: e.target.value });
+  const handleChange = (e) => {
+    setInput(e.target.value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const newTodoItem = { id: idItem++, type: this.state.input };
-    const { addTodo } = this.props;
+    const newTodoItem = { id: idItem++, type: input };
     addTodo(newTodoItem);
-    this.setState({ input: "" });
+    setInput("");
   };
 
-  render() {
-    const { input } = this.state;
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <input type="text" onChange={this.handleChange} value={input} />
-      </form>
-    );
-  }
-}
+  return (
+    <form onSubmit={handleSubmit}>
+      <input type="text" onChange={handleChange} value={input} />
+    </form>
+  );
+};
 
 export default TodoForm;

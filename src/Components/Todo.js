@@ -1,12 +1,8 @@
-import { Component } from "react";
-
 import TodoItem from "./TodoItem";
 
-class Todo extends Component {
-  render() {
-    const { todoList, removeTodo, toast } = this.props;
-    return (
-        <div>
+const Todo = ({ todoList, removeTodo, toast }) => {
+  return (
+    <div>
       <ul id="todos">
         {todoList.map((todoItem) => {
           return (
@@ -19,9 +15,8 @@ class Todo extends Component {
           );
         })}
       </ul>
-      </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default Todo;

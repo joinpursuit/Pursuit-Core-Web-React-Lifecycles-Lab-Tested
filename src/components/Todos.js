@@ -1,45 +1,33 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "../../node_modules/react-toastify/dist/ReactToastify.css";
-import TodoForm from "./TodoForm"
+import TodoForm from "./TodoForm";
 import Todo from "./Todo";
 
-// let idItem = 1;
+const Todos = () => {
+  const [todoList, setTodoList] = useState([]);
 
-
-class Todos extends React.Component {
-  state = { todoList: [] };
-
-  removeTodo= (id) => {
-    const filterArr = this.state.todoList.filter((item) => item.id !==id)
-    this.setState({todoList: filterArr})
-}
-
-  addTodo = (todo) => {
-    // const newTodoItem = { id: idItem++, type: todo };
-    this.setState((prevState) => ({
-      todoList: [ ...prevState.todoList, todo],
-    }));
+  const removeTodo = (id) => {
+    const filterArr = todoList.filter((item) => item.id !== id);
+    setTodoList(filterArr);
   };
 
-     componentDidUpdate() {
-       let count=this.state.todoList.length
-       toast(`Remaining todos: ${count}`)
-    }
+  const addTodo = (todo) => {
+    setTodoList((prevTodoList) => [...prevTodoList, todo]);
+  };
 
-  
+  useEffect(() => {
+    let count = todoList.length;
+    toast(`Remaining todos: ${count}`);
+  });
 
-
-  render() {
-      const {todoList} = this.state
-    return (
-      <div>
-          <ToastContainer />
-        <TodoForm addTodo={this.addTodo} />
-        <Todo toast={toast} removeTodo={this.removeTodo} todoList={todoList} />
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <ToastContainer />
+      <TodoForm addTodo={addTodo} />
+      <Todo toast={toast} removeTodo={removeTodo} todoList={todoList} />
+    </div>
+  );
+};
 
 export default Todos;

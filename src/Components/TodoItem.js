@@ -1,30 +1,18 @@
-import { Component } from "react";
-// import { toast, ToastContainer } from "react-toastify";
-// import "../../node_modules/react-toastify/dist/ReactToastify.css";
+import { useEffect } from "react";
 
-// toast.configure();
-
-class TodoItem extends Component {
-  componentDidMount() {
-    const { todoItem, toast } = this.props;
+const TodoItem = ({ todoItem, toast, removeTodo }) => {
+  
+  useEffect(() => {
     toast.success(`New todo added: ${todoItem.type}`);
-  }
+    return () => toast.error(`Todo deleted: ${todoItem.type}`);
+  }, []);
 
- 
-  componentWillUnmount() {
-    const { todoItem, toast } = this.props;
-    toast.error(`Todo deleted: ${todoItem.type}`);
-  }
-
-  render() {
-    const { todoItem, removeTodo } = this.props;
-    return (
-      <li>
-        {todoItem.type}
-        <button onClick={() => removeTodo(todoItem.id)}>x</button>
-      </li>
-    );
-  }
-}
+  return (
+    <li>
+      {todoItem.type}
+      <button onClick={() => removeTodo(todoItem.id)}>x</button>
+    </li>
+  );
+};
 
 export default TodoItem;
