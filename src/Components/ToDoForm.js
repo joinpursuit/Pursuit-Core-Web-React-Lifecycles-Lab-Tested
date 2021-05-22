@@ -3,12 +3,10 @@ import React from "react";
 class ToDo extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = { enterToDo: "" };
     this.state = {
         input : "",
     }
   }
-        // const obj= {enterToDo: []}
 
   handleSubmit = (e) => {
     e.preventDefault();
@@ -17,14 +15,10 @@ class ToDo extends React.Component {
   };
 
   handleChange = (e) => {
-    // const { input, value} = e.target
-    // this.setState( { [input]: value})
+  
     this.setState({input: e.target.value})
   };
 
-  componentDidMount() {}
-
-  componentDidUpdate() {}
 
   render() {
     const { enterToDo } = this.state;
@@ -34,8 +28,6 @@ class ToDo extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             onChange={this.handleChange}
-            id="#todos"
-            name="enterToDo"
             type="text"
             value={this.state.input}
           />
