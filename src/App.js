@@ -1,39 +1,52 @@
-import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { useState } from "react";
+import { ToastContainer } from "react-toastify";
 import Form from "./Components/Form";
 import Todos from "./Components/Todos";
 
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
-class App extends React.Component {
-  state = { list: [] };
+const App = () => {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
 
-  addToDo = (todo) => {
-    const Todo = { name: todo };
-    this.setState((prevState) => ({
-      list: [...prevState.list, Todo],
-    }));
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
   };
 
-  removeTodo = (name) => {
-    const removeArr = this.state.list.filter((todo) => todo.name !== name);
-    this.setState({ list: removeArr });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newToDo = { text: input };
+    addToDo(newToDo);
+    setInput("");
   };
 
-  render() {
-    return (
-      <div className="app">
-        <ToastContainer />
-        <Form addToDo={this.addToDo} />
-        <ul id="todos">
-          {this.state.list.map((todo) => (
-            <Todos todo={todo} removeTodo={this.removeTodo} key={todo.name} />
-          ))}
-        </ul>
-      </div>
-    );
-  }
-}
+  const addToDo = (todo) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, todo];
+    });
+  };
+
+  const deleteToDo = (item) => {
+    const filterArr = todos.filter((todo) => {
+      return item.text !== todo.text;
+    });
+    setTodos(filterArr);
+  };
+
+  return (
+    <div className="App">
+      <ToastContainer />
+      <h4>Give me something to do!</h4>
+      <Form
+        input={input}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+      <Todos todos={todos} deleteToDo={deleteToDo} />
+    </div>
+  );
+};
 
 export default App;
