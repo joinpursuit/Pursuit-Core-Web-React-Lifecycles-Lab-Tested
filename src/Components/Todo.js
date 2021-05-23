@@ -2,9 +2,9 @@ import React from 'react'
 import Item from "./Item.js"
 export default function Todo(props) {
 
-    return <li id="itemListed">
+    return <li id="todos">
             {props.listItem.map((item, i) => {
-                return <Item item={item}  key={i} index={i} handleDelete={props.handleDelete}/>
+                return <Item item={item}  key={item} index={i} handleDelete={props.handleDelete}/>
             })}
             </li>
     

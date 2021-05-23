@@ -4,16 +4,16 @@ export class Item extends Component {
     componentDidMount() {
         toast.success(`New todo added: ${this.props.item}`);
       }
-      componentWillUnmount() {
+    componentWillUnmount() {
         toast.error(`Todo deleted: ${this.props.item}`);
       }
     render() {
 
         return (
-            <li>
-                {this.props.item}
-                <button onClick={()=>this.props.handleDelete(this.props.index)}>Delete</button>
-            </li>
+            <ul id='todos'> 
+                <p>{this.props.item}</p>
+                <button onClick={()=>this.props.handleDelete(this.props.index)}>x</button>
+            </ul>
         )
     }
 }

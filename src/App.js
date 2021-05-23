@@ -10,6 +10,7 @@ class App extends React.Component {
     this.state = {
       listItem: [],
       todo : '',
+      removed: ''
     }
   }
   handleInput = (event) => {
@@ -17,19 +18,19 @@ class App extends React.Component {
   }
   handleItem = (event) => {
     event.preventDefault()
-    this.setState({listItem : [...this.state.listItem, event.target.todo.value]})
+    this.setState({listItem : [...this.state.listItem, this.state.todo]})
   }
-  handleDelete = (idx) => {
+  handleDelete = (index) => {
     const listItem = [...this.state.listItem]
-    listItem.splice(idx, 1)
+    this.setState({removed: listItem.splice(index, 1)})
     this.setState({listItem})
   }
   render() {
     return (
       <div className="app">
         <div>
-          <Form handleInput={this.handleInput} handleItem = {this.handleItem} todo={this.state.todo}/>
-          <ToDo handleDelete = {this.handleDelete} listItem = {this.state.listItem} />
+          <Form handleInput={this.handleInput} handleItem = {this.handleItem} todo= {this.state.todo}/>
+          <ToDo handleDelete = {this.handleDelete} listItem={this.state.listItem} removed= {this.state.removed} />
         </div>
         <div>
           <ToastContainer />
