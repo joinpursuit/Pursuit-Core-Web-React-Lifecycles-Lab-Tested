@@ -1,51 +1,44 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import TodoForm from "./TodoForm";
 import TodoItem from "./TodoItem";
-// import uuid from 'react-uuid';
 
-import { toast } from "react-toastify";
+const Todo = () => {
+  const [todos, setTodos] = useState([]);
+  const [todo, setTodo] = useState({});
+  const [removeToast, setRemoveToast] = useState(false);
+  const [todoID,setTodoID] = useState("")
 
-class Todo extends Component {
-  state = { todos: [] };
-
-  addTodo = (todo) => {
+  const addTodo = (todo) => {
     const newTodo = { id: todo, content: todo };
-    this.componentDidMount(newTodo.content);
-    this.setState((prevState) => ({ todos: [...prevState.todos, newTodo] }));
-    
 
-  };
-  removeTodo = (id) => {
-    const filterArr = this.state.todos.filter((item) => item.id !== id);
-    this.componentWillUnmount(id);
-    this.setState({ todos: filterArr });
+    setTodo(newTodo);
+    setTodos([...todos, newTodo]);
+    debugger
+    setRemoveToast(false);
   };
 
-  componentDidMount(newTodo) {
-    //   debugger
-    if (newTodo !== undefined) {
-      toast.success(`New todo added: ${newTodo}`);
-    }
-  }
-  componentWillUnmount(id) {
-    toast.error(`Todo deleted: ${id}`);
-  }
+  const removeTodo = (id) => {
+    debugger
+    setTodoID(id)
+    const filterArr = todos.filter((item) => item.id !== id);
+    setTodos(filterArr);
+    setRemoveToast(true);
+  };
 
-  componentDidUpdate(){
-      const {todos} = this.state
-      let count = todos.length
-      toast(`Remaining todos: ${count}`)
-  }
-  render() {
-    const { todos } = this.state;
-    const { removeTodo } = this.props;
-    return (
-      <div>
-        <TodoForm addTodo={this.addTodo} />
-        <TodoItem removeTodo={this.removeTodo} todos={todos} />
-      </div>
-    );
-  }
-}
+
+  return (
+    <div>
+      <TodoForm addTodo={addTodo} />
+      <TodoItem
+        setRemoveToast={setRemoveToast}
+        removeToast={removeToast}
+        removeTodo={removeTodo}
+        todos={todos}
+        todo={todo}
+        todoID={todoID}
+      />
+    </div>
+  );
+};
 
 export default Todo;

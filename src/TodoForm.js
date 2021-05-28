@@ -1,32 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 
-class ShoppingForm extends React.Component {
-  state = { input: "" };
+const TodoForm = ({addTodo}) => {
+  
+const [input, setInput] = useState("")
 
-  handleInputChange = (e) => {
-    this.setState({ input: e.target.value });
+  const handleInputChange = (e) => {
+   setInput(e.target.value);
   };
 
-  handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const { addTodo } = this.props;
-    addTodo(this.state.input);
-    this.setState({input: ""});
+   
+    addTodo(input);
+    setInput("");
   };
 
-  render() {
-    const { input } = this.state;
+ 
+    
     return (
-      <form onSubmit={this.handleSubmit} id={this.state.input}>
+      <form onSubmit={handleSubmit} id={input}>
         <input
-          onChange={this.handleInputChange}
+          onChange={handleInputChange}
           className="ToDoInput"
           value={input}
           placeholder="Enter a Todo"
         />
       </form>
     );
-  }
+  
 }
 
-export default ShoppingForm;
+export default TodoForm;
