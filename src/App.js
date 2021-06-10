@@ -1,61 +1,51 @@
-import React from "react";
+import { useState } from "react";
 import { ToastContainer } from "react-toastify";
+import Todos from "./Components/Todos";
 import "../node_modules/react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import Form from "./Components/Form";
 
-import Todos from "./Todos"
-import Form from "./Form"
+const App = () => {
+  const [todos, setTodos] = useState([]);
+  const [input, setInput] = useState("");
 
-class App extends React.Component {
-  constructor(){
-    super()
-    
-    this.state = {
-      todos: [],
-      todo: "",
-    }
-  }
+  const handleChange = (e) => {
+    const { value } = e.target;
+    setInput(value);
+  };
 
-  input = (e) => {
-      this.setState({
-        todo: e.target.value
-      })
-  }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const newToDo = { text: input };
+    addToDo(newToDo);
+    setInput("");
+  };
 
-  todoStateFunc = (e) => {
-      e.preventDefault()
-      this.setState({
-        todos: this.state.todos.concat(this.state.todo)
-      })   
-  }
+  const addToDo = (todo) => {
+    setTodos((prevTodos) => {
+      return [...prevTodos, todo];
+    });
+  };
 
+  const deleteToDo = (item) => {
+    const filterArr = todos.filter((todo) => {
+      return item.text !== todo.text;
+    });
+    setTodos(filterArr);
+  };
 
-  removed = (id) => {
-    const todos = [...this.state.todos]
-    todos.splice(id,1)
-    this.setState({
-      todos
-    })
-  }
-
-
-
-  render() {
-    return (
-      <div className="app">
-        <Form 
-        input = {this.input}
-        todoStateFunc = {this.todoStateFunc}
-        />
-        <Todos
-        removed = {this.removed}
-        todos = {this.state.todos}
-        />
-        <ToastContainer />
-        Give me something to do?!
-      </div>
-    );
-  }
-}
+  return (
+    <div className="App">
+      <ToastContainer />
+      <h4>Give me something to do?!</h4>
+      <Form
+        input={input}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      />
+      <Todos todos={todos} deleteToDo={deleteToDo} />
+    </div>
+  );
+};
 
 export default App;

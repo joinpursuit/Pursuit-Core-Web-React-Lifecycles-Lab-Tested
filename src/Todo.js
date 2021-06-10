@@ -1,29 +1,13 @@
-import React, { Component } from 'react'
-import {toast} from "react-toastify"
+import Todo from "./Todo";
 
-export class Todo extends Component {
+const Todos = ({ todos, deleteToDo }) => {
+  return (
+    <ul id="todos">
+      {todos.map((todo) => {
+        return <Todo todo={todo} deleteToDo={deleteToDo} key={todo.text} />;
+      })}
+    </ul>
+  );
+};
 
-    componentDidMount(){
-        toast.success(`New todo added: ${this.props.todo} `)
-    }
-
-    componentWillUnmount(){
-        toast.error(`Todo deleted: ${this.props.todo}`)
-    }
-
-    render() {
-        const {todo, removed, id} = this.props
-        return (
-            <div>
-                <li>
-                <div key={id}>
-                {todo}
-                <button onClick={() => removed(id)} >x</button>
-                </div>
-                </li>
-            </div>
-        )
-    }
-}
-
-export default Todo
+export default Todos;
